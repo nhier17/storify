@@ -8,7 +8,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
           <div className="flex items-center gap-2">
             <Image
-              src="/assets/icons/logo1.png"
+              src="/assets/icons/logo1.jpg"
               alt="logo"
               width={50}
               height={50}
@@ -36,7 +36,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       <section className="flex flex-1 flex-col items-center bg-white p-4 py-10 lg:justify-center lg:p-10 lg:py-0">
         <div className="mb-16 lg:hidden flex items-center gap-2">
           <Image
-            src="/assets/icons/logo1.png"
+            src="/assets/icons/logo1.jpg"
             alt="logo"
             width={50}
             height={50}

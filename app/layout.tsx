@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Storify",
   description: "Manage your files effortlessly",
   icons: {
-    icon: "/icons/logo1.png",
+    icon: "/assets/icons/logo1.jpg",
   },
 };
 
