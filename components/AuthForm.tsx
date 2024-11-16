@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 import {
   Form
 } from "@/components/ui/form"
-import CustomInput, { FormFieldType  } from './CustomInput';
+import CustomInput from './CustomInput';
 import { authFormSchema } from '@/lib/utils';
 import OTPModal from './OTPModal';
 import { createAccount, signInUser } from '@/lib/actions/user.actions';
@@ -35,6 +35,7 @@ const AuthForm = ({ type }: { type: FormType}) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
+    setErrorMessage("");
     try {
       const user =
       type === 'sign-up'
@@ -65,7 +66,6 @@ const AuthForm = ({ type }: { type: FormType}) => {
 
         {type === 'sign-up' && (
             <CustomInput
-              fieldType={FormFieldType.INPUT}
               control={form.control}
               name="fullName"
               label="Full Name"
@@ -75,7 +75,6 @@ const AuthForm = ({ type }: { type: FormType}) => {
             />
         )}
              <CustomInput
-              fieldType={FormFieldType.INPUT}
               control={form.control}
               name="email"
               label="Email"

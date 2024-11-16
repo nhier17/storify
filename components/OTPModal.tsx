@@ -59,7 +59,7 @@ const OTPModal = ({
       <AlertDialogContent className="shad-alert-dialog">
         <AlertDialogHeader className="relative flex justify-center">
             <AlertDialogTitle className="h2 text-center">
-                Enter the OTP sent to your email
+                Enter your OTP
                 <Image 
                 src="/assets/icons/close-dark.svg" 
                 alt="logo" 

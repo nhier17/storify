@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import Image from "next/image";
-import { Control } from "react-hook-form";
+import { Control, FieldPath } from "react-hook-form";
 import {
     FormControl,
     FormField,
@@ -9,28 +8,25 @@ import {
     FormLabel,
     FormMessage,
   } from "./ui/form";
+  import { z } from 'zod';
   import { Input } from "./ui/input";
+  import { authFormSchema } from '@/lib/utils';
 
-  export enum FormFieldType {
-    INPUT = "input",
-    TEXTAREA = "textarea",
-  }
+  const formSchema = authFormSchema('sign-up')
+
 
   interface CustomProps {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    control: Control<any>;
-    name: string;
+    control: Control<z.infer<typeof formSchema>>;
+    name: FieldPath<z.infer<typeof formSchema>>;
     label?: string;
     placeholder?: string;
     iconSrc?: string;
     iconAlt?: string;
     children?: React.ReactNode;
-    fieldType: FormFieldType;
   }
 
   const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-    switch (props.fieldType) {
-      case FormFieldType.INPUT:
+
         return (
           <div className="flex rounded-md ">
             {props.iconSrc && (
@@ -52,7 +48,6 @@ import {
           </div>
         )
     }
-  }
 
 const CustomInput = (props: CustomProps) => {
   const { control, name, label } = props;
