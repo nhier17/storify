@@ -13,13 +13,12 @@ import {
 } from "@/components/ui/form"
 import CustomInput, { FormFieldType  } from './CustomInput';
 import { authFormSchema } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
 import OTPModal from './OTPModal';
+import { createAccount, signInUser } from '@/lib/actions/user.actions';
 
 type FormType = "sign-in" | "sign-up";
 
 const AuthForm = ({ type }: { type: FormType}) => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [accountId, setAccountId] = useState(null);
@@ -37,8 +36,17 @@ const AuthForm = ({ type }: { type: FormType}) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     try {
-      console.log(values);
-      
+      const user =
+      type === 'sign-up'
+      ? await createAccount({
+          email: values.email,
+          fullName: values.fullName || "",
+        })
+      : await signInUser({ email: values.email });
+
+      if(!user) throw new Error("Failed to create account");
+
+      setAccountId(user.accountId);
     } catch (error) {
       console.log(error);
       setErrorMessage("Failed to create account");

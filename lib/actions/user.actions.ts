@@ -25,7 +25,7 @@ const handleError = (error: unknown, message: string) => {
   };
 
 //send email otp
-export const sendEmailOtp = async ({ email }: { email: string }) => {
+export const sendEmailOTP = async ({ email }: { email: string }) => {
     const { account } = await createAdminClient();
 
     try {
@@ -46,7 +46,7 @@ export const createAccount = async ({
   }) => {
     const existingUser = await getUserByEmail(email);
 
-    const accountId = await sendEmailOtp({ email });
+    const accountId = await sendEmailOTP({ email });
 
     if(!existingUser) {
     const { databases } = await createAdminClient();
@@ -58,7 +58,7 @@ export const createAccount = async ({
         {
             fullName,
             email,
-            avatarUrl: avatarPlaceholderUrl,
+            avatar: avatarPlaceholderUrl,
             accountId,
         }
     );
@@ -114,7 +114,7 @@ export const createAccount = async ({
        const existingUser = await getUserByEmail(email);
 
        if(existingUser) {
-        await sendEmailOtp({ email });
+        await sendEmailOTP({ email });
         return parseStringify({ accountId: existingUser.accountId });
        }
     } catch (error) {
