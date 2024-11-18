@@ -6,15 +6,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const authFormSchema = (type: "sign-in" | "sign-up"): z.ZodObject<{
-  email: z.ZodString;
-  fullName: z.ZodString;
-}> => {
+export const authFormSchema = (type: "sign-in" | "sign-up") => {
   return z.object({
-    email: z.string().email(),
-    fullName: type === 'sign-in' ? z.string().min(2, 'Full name is required') : z.string().min(2, 'Full name is required'),
+    email: z.string().email("Invalid email address"),
+    fullName: type === "sign-up"
+      ? z.string().min(2, "Full name is required")
+      : z.string().optional(),
   });
-}
+};
 
 export const parseStringify = (value: unknown) =>
   JSON.parse(JSON.stringify(value));

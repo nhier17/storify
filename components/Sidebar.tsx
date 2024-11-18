@@ -67,7 +67,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         alt="logo"
         width={506}
         height={418}
-        className="w-full"
+        className="w-full transition-all hover:rotate-2 hover:scale-105"
       />
 
       <div className="sidebar-user-info">
