@@ -28,7 +28,7 @@ const Sort = () => {
                 <SelectItem 
                     key={type.value} 
                     value={type.value}
-                    className="sort-select-item"
+                    className="shad-select-item"
                 >
                     {type.label}
                 </SelectItem>
