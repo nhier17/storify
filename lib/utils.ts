@@ -194,36 +194,37 @@ export const constructDownloadUrl = (bucketFileId: string) => {
 };
 
 // DASHBOARD UTILS
-export const getUsageSummary = (totalSpace: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getUsageSummary = (totalFileSpaceUsed: any) => {
   return [
     {
       title: "Documents",
-      size: totalSpace.document.size,
-      latestDate: totalSpace.document.latestDate,
+      size: totalFileSpaceUsed.document.size,
+      latestDate: totalFileSpaceUsed.document.latestDate,
       icon: "/assets/icons/file-document-light.svg",
       url: "/documents",
     },
     {
       title: "Images",
-      size: totalSpace.image.size,
-      latestDate: totalSpace.image.latestDate,
+      size: totalFileSpaceUsed.image.size,
+      latestDate: totalFileSpaceUsed.image.latestDate,
       icon: "/assets/icons/file-image-light.svg",
       url: "/images",
     },
     {
       title: "Media",
-      size: totalSpace.video.size + totalSpace.audio.size,
+      size: totalFileSpaceUsed.video.size + totalFileSpaceUsed  .audio.size,
       latestDate:
-        totalSpace.video.latestDate > totalSpace.audio.latestDate
-          ? totalSpace.video.latestDate
-          : totalSpace.audio.latestDate,
+        totalFileSpaceUsed.video.latestDate > totalFileSpaceUsed.audio.latestDate
+          ? totalFileSpaceUsed.video.latestDate
+          : totalFileSpaceUsed.audio.latestDate,
       icon: "/assets/icons/file-video-light.svg",
       url: "/media",
     },
     {
       title: "Others",
-      size: totalSpace.other.size,
-      latestDate: totalSpace.other.latestDate,
+      size: totalFileSpaceUsed.other.size,
+      latestDate: totalFileSpaceUsed.other.latestDate,
       icon: "/assets/icons/file-other-light.svg",
       url: "/others",
     },
