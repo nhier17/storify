@@ -68,7 +68,7 @@ const createQueries = (
     types: string[],
     searchText: string,
     sort: string,
-    limit: number
+    limit?: number
 ) => {
     const queries = [
         Query.or([
