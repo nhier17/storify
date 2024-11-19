@@ -19,8 +19,8 @@ interface Props {
 
 const FileUploader = ({ ownerId, accountId, className }: Props) => {
   const path = usePathname();
-  const [files, setFiles] = useState<File[]>([]);
   const { toast } = useToast();
+  const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -61,64 +61,70 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
-  const handleRemoveFile = (e: React.MouseEvent<HTMLImageElement>, fileName: string) => {
+  const handleRemoveFile = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    fileName: string,
+  ) => {
     e.stopPropagation();
-    setFiles((prevFiles) => prevFiles.filter((f) => f.name !== fileName));
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
   };
 
   return (
     <div {...getRootProps()} className="cursor-pointer">
       <input {...getInputProps()} />
       <Button type="button" className={cn("uploader-button", className)}>
-        <Image 
-          src="/assets/icons/upload.svg" 
-          alt="file-upload" 
-          width={24} 
-          height={24} 
+        <Image
+          src="/assets/icons/upload.svg"
+          alt="upload"
+          width={24}
+          height={24}
         />{" "}
         <p>Upload</p>
       </Button>
       {files.length > 0 && (
-        <ul className="flex flex-col gap-2">
+        <ul className="uploader-preview-list">
           <h4 className="h4 text-light-100">Uploading</h4>
 
-          {files.map((file, i) => {
+          {files.map((file, index) => {
             const { type, extension } = getFileType(file.name);
+
             return (
-              <li key={`${file.name}-${i}`} 
+              <li
+                key={`${file.name}-${index}`}
                 className="uploader-preview-item"
               >
                 <div className="flex items-center gap-3">
-                  <Thumbnail 
-                    type={type} 
-                    extension={extension} 
+                  <Thumbnail
+                    type={type}
+                    extension={extension}
                     url={convertFileToUrl(file)}
                   />
+
                   <div className="preview-item-name">
                     {file.name}
-                    <Image 
-                      src="/assets/icons/file-loader.gif" 
-                      alt="close" 
-                      width={80} 
-                      height={26} 
+                    <Image
+                      src="/assets/icons/file-loader.gif"
+                      width={80}
+                      height={26}
+                      alt="Loader"
                     />
                   </div>
                 </div>
 
-                <Image 
-                  src="/assets/icons/remove.svg" 
-                  alt="close" 
-                  width={24} 
-                  height={24} 
+                <Image
+                  src="/assets/icons/remove.svg"
+                  width={24}
+                  height={24}
+                  alt="Remove"
                   onClick={(e) => handleRemoveFile(e, file.name)}
                 />
               </li>
-            )
+            );
           })}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default FileUploader
+export default FileUploader;

@@ -4,6 +4,6 @@ export const appwriteConfig = {
     databaseId: process.env.APPWRITE_DATABASE_ID!,
     userCollectionId: process.env.APPWRITE_USER_COLLECTION_ID!,
     fileCollectionId: process.env.APPWRITE_FILE_COLLECTION_ID!,
-    storageId: process.env.APPWRITE_STORAGE_ID!,
+    storageId: process.env.NEXT_PUBLIC_APPWRITE_BUCKET!,
     secretKey: process.env.APPWRITE_SECRET!,
 }
