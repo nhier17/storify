@@ -35,6 +35,10 @@ const MobileNavbar = ({
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   return (
     <header className="mobile-header">
       <div className="flex items-center gap-2">
@@ -76,7 +80,7 @@ const MobileNavbar = ({
           <nav className="mobile-nav">
             <ul className="mobile-nav-list">
               {navItems.map(({ url, name, icon }) => (
-                <Link href={url} key={name} className="lg:w-full">
+                <Link href={url} key={name} className="lg:w-full" onClick={handleClose}>
                   <li className={cn(
                     "mobile-nav-item",
                     pathname === url && "shad-active"

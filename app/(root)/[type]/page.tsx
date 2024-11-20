@@ -14,6 +14,14 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
 
     const files = await getFiles({ types, searchText, sort });
     
+    // Calculate total size
+    const totalSize = files.documents.reduce(
+      (total: number, file: Models.Document) => total + (file.size || 0),
+      0
+    );
+
+    const totalSizeInMB = (totalSize / (1024 * 1024)).toFixed(2); 
+    
 
   return (
     <div className="page-container">
@@ -22,7 +30,7 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
 
         <div className="total-size-section">
             <p className="body-1">
-                Total: <span className="h-5">0 MB</span>
+                Total: <span className="h-5">{totalSizeInMB} MB</span>
             </p>
 
             <div className="sort-container">
